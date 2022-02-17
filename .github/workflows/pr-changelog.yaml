@@ -1,0 +1,22 @@
+﻿name: Github Changelog Automation
+
+on:
+  pull_request:
+    types:
+      - opened
+    branches:    
+      - master
+
+jobs: 
+  created: 
+    name: Commit Check
+    runs-on: ubuntu-18.04
+    steps: 
+    - name: running commitlint
+      run: npx --no -- commitlint --edit $1
+  approved: 
+    name: Automate Changelog
+    runs-on: ubuntu-18.04
+    steps: 
+    - name: compile Changelog
+      run: npm run release
