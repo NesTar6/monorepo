@@ -10,5 +10,5 @@ jobs:
         uses: peter-evans/slash-command-dispatch@v2
         with:
           token: ${{ secrets.REPO_ACCESSS_TOKEN }}
-          commands: example
+          commands: changelog
           repository: NesTar6/monorepo
