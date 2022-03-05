@@ -9,6 +9,6 @@ jobs:
       - name: Slash Command Dispatch
         uses: peter-evans/slash-command-dispatch@v2
         with:
-          token: ${{ secrets.REPO_ACCESS_TOKEN }}
+          token: ${{ secrets.REPO_ACCESSS_TOKEN }}
           commands: example
           repository: NesTar6/monorepo
