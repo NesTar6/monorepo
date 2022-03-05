@@ -11,4 +11,4 @@ jobs:
         with:
           token: ${{ secrets.REPO_ACCESS_TOKEN }}
           commands: example
-          repository: your-github-username/slash-command-processor
+          repository: NesTar6/slash-command-processor
