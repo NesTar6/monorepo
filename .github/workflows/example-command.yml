@@ -8,6 +8,7 @@ jobs:
     steps:
       - name: Add reaction
         run: |
+          echo "$GITHUB_CONTEXT"
           echo ${{ github.event.client_payload.slash_command.command }}
           echo ${{ github.event.client_payload.slash_command.args.all }}
           echo ${{ github.event.client_payload.slash_command.args.unnamed.all }}
