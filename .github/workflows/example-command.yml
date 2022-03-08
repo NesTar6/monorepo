@@ -1,9 +1,9 @@
-﻿name: example-command
+﻿name: changelog-command
 on:
   repository_dispatch:
-    types: [example-command]
+    types: [changelog-command]
 jobs:
-  helloWorld:
+  changelog:
     runs-on: ubuntu-latest
     steps:
       - name: Add reaction
