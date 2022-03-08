@@ -3,7 +3,7 @@ on:
   repository_dispatch:
     types: [example-command]
 jobs:
-  example:
+  helloWorld:
     runs-on: ubuntu-latest
     steps:
       - name: Add reaction
@@ -14,15 +14,17 @@ jobs:
           comment-id: ${{ github.event.client_payload.github.payload.comment.id }}
           reaction-type: hooray
 
+      - name: Create URL to the run output
+        id: vars
+        run: echo ::set-output name=run-url::https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID
 
       - name: Create comment
         uses: peter-evans/create-or-update-comment@v1
         with:
-          issue-number: 1
+          token: ${{ secrets.REPO_ACCESSS_TOKEN }}
+          repository: ${{ github.event.client_payload.github.payload.repository.full_name }}
+          issue-number: ${{ github.event.client_payload.github.payload.issue.number }}
           body: |
-            This is a multi-line test comment
-            - With GitHub **Markdown** :sparkles:
-            - Created by [create-or-update-comment][1]
-
-            [1]: https://github.com/peter-evans/create-or-update-comment
-          reactions: '+1'
+            Hello @${{ github.event.client_payload.github.actor }}!
+            [Click here to see the command run output][1]
+            [1]: ${{ steps.vars.outputs.run-url }}
