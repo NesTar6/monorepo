@@ -27,4 +27,4 @@ jobs:
           body: |
             Hello @${{ github.event.client_payload.github.actor }}!
             added the following update to the upcoming version in the changelog: 
-            ${{ github.event.client_payload.slash_command.args.all }}
+            `${{ github.event.client_payload.slash_command.args.all }}`
