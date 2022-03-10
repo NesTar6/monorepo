@@ -37,6 +37,9 @@ jobs:
           git commit -m "${{ steps.vars.outputs.changelog-desc }}"
           git push
           npm run release
+          git add -A
+          git commit -m "changelog updated with ${{ steps.vars.outputs.changelog-desc }}"
+          git push
 
       - name: Create comment
         uses: peter-evans/create-or-update-comment@v1
