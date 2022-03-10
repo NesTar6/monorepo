@@ -14,9 +14,9 @@ jobs:
           comment-id: ${{ github.event.client_payload.github.payload.comment.id }}
           reaction-type: hooray
 
-      - name: Create URL to the run output
+      - name: Create variable to store command
         id: vars
-        run: echo ::set-output name=run-url::https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID
+        run: echo ::set-output name=changelog-desc::{{ github.event.client_payload.slash_command.args.all }}
 
       - name: Create comment
         uses: peter-evans/create-or-update-comment@v1
@@ -27,4 +27,9 @@ jobs:
           body: |
             Hello @${{ github.event.client_payload.github.actor }}!
             added the following update to the upcoming version in the changelog: 
-            `${{ github.event.client_payload.slash_command.args.all }}`
+            `${{ steps.vars.outputs.changelog-desc }}`
+
+      - name: Commit changelog desc
+        run: git commit -m {{ steps.vars.outputs.changelog-desc }}
+      
+      

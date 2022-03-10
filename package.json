@@ -22,6 +22,10 @@
     ]
   },
   "scripts": {
+    "release": "standard-version",
+    "release:minor": "standard-version --release-as minor",
+    "release:patch": "standard-version --release-as patch",
+    "release:major": "standard-version --release-as major",
     "reset": "yarn clean && yarn && yarn build",
     "clean": "npx rimraf ./**/node_modules ./**/build ./**/coverage ./**/.w3",
     "install:dependencies": "cd dependencies && yarn",
@@ -38,20 +42,23 @@
     "test:ci": "lerna run test:ci --no-private --ignore @web3api/client-js --concurrency 1 && lerna run test:ci --scope @web3api/client-js",
     "version:apply": "npx lerna version $(cat VERSION) --exact --no-git-tag-version --yes",
     "postversion:apply": "git add . && git commit -m \"build(release): migrate to `cat ./VERSION`\"",
-    "publish:npm": "lerna publish from-package --no-private --yes --registry https://registry.npmjs.org/ --no-verify-access"
+    "publish:npm": "lerna publish from-package --no-private --yes --registry https://registry.npmjs.org/ --no-verify-access",
+    "prepare": "husky install"
   },
   "devDependencies": {
-    "lerna": "4.0.0",
-    "rimraf": "3.0.2",
+    "@graphql-eslint/eslint-plugin": "1.0.1",
     "@typescript-eslint/eslint-plugin": "4.11.1",
     "@typescript-eslint/parser": "4.11.1",
     "eslint": "7.16.0",
     "eslint-config-prettier": "7.1.0",
     "eslint-plugin-import": "2.22.1",
+    "eslint-plugin-json": "3.0.0",
     "eslint-plugin-prettier": "3.4.0",
-    "prettier": "2.2.1",
     "graphql": "15.5.0",
-    "@graphql-eslint/eslint-plugin": "1.0.1",
-    "eslint-plugin-json": "3.0.0"
+    "husky": "^7.0.0",
+    "lerna": "4.0.0",
+    "prettier": "2.2.1",
+    "rimraf": "3.0.2",
+    "standard-version": "^9.3.2"
   }
 }
