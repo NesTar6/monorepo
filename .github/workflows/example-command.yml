@@ -30,6 +30,11 @@ jobs:
             `${{ steps.vars.outputs.changelog-desc }}`
 
       - name: Commit changelog desc
-        run: git commit -m ${{ steps.vars.outputs.changelog-desc }}
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: ${{ steps.vars.outputs.changelog-desc }}
+
+      - name: Automate changelog
+        run: npm run release
       
       
