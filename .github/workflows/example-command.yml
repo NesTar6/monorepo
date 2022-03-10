@@ -26,7 +26,7 @@ jobs:
           issue-number: ${{ github.event.client_payload.github.payload.issue.number }}
           body: |
             Hello @${{ github.event.client_payload.github.actor }}!
-            added the following update to the upcoming version in the changelog: 
+            added the following update to the upcoming version in the changelog:
             `${{ steps.vars.outputs.changelog-desc }}`
 
       - name: Commit changelog desc
