@@ -16,7 +16,7 @@ jobs:
 
       - name: Create variable to store command
         id: vars
-        run: echo ::set-output name=changelog-desc::{{ github.event.client_payload.slash_command.args.all }}
+        run: echo ::set-output name=changelog-desc::${{github.event.client_payload.slash_command.args.all }}
 
       - name: Create comment
         uses: peter-evans/create-or-update-comment@v1
@@ -30,6 +30,6 @@ jobs:
             `${{ steps.vars.outputs.changelog-desc }}`
 
       - name: Commit changelog desc
-        run: git commit -m {{ steps.vars.outputs.changelog-desc }}
+        run: git commit -m ${{ steps.vars.outputs.changelog-desc }}
       
       
