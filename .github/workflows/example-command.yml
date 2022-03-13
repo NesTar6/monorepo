@@ -12,14 +12,16 @@ jobs:
         run: echo ::set-output name=changelog-desc::${{github.event.client_payload.slash_command.args.all }}
 
       - name: Check incorrect format
-        if:   "!(startsWith(steps.vars.outputs.changelog-desc, 'feat:') || 
-              startsWith(steps.vars.outputs.changelog-desc, 'fix:') ||
-              startsWith(steps.vars.outputs.changelog-desc, 'chore:') ||
-              startsWith(steps.vars.outputs.changelog-desc, 'docs:') ||
-              startsWith(steps.vars.outputs.changelog-desc, 'style:') ||
-              startsWith(steps.vars.outputs.changelog-desc, 'refactor:') ||
-              startsWith(steps.vars.outputs.changelog-desc, 'perf:') ||
-              startsWith(steps.vars.outputs.changelog-desc, 'test:'))"
+        if:   |
+              ${{ !(startsWith(steps.vars.outputs.changelog-desc, 'feat:')) && 
+              !(startsWith(steps.vars.outputs.changelog-desc, 'fix:')) &&
+              !(startsWith(steps.vars.outputs.changelog-desc, 'chore:')) &&
+              !(startsWith(steps.vars.outputs.changelog-desc, 'docs:')) &&
+              !(startsWith(steps.vars.outputs.changelog-desc, 'style:')) &&
+              !(startsWith(steps.vars.outputs.changelog-desc, 'refactor:')) &&
+              !(startsWith(steps.vars.outputs.changelog-desc, 'perf:')) &&
+              !(startsWith(steps.vars.outputs.changelog-desc, 'test:')) }}
+
         run:  |
               echo "Does not contain follow syntax or contain defined type"
               exit 1
