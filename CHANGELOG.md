@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 0.0.7 (2022-03-13)
+
+
+### Features
+
+* automated change log formatting ([d5e567b](https://github.com/web3-api/monorepo/commit/d5e567bbc65308e3495230f413e40e334bc45376))
+
 ### 0.0.6 (2022-03-13)
 
 
