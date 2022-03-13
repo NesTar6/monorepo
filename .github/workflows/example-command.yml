@@ -11,7 +11,13 @@ jobs:
         id: vars
         run: echo ::set-output name=changelog-desc::${{github.event.client_payload.slash_command.args.all }}
 
-      - name: Check format
+      - name: Check incorrect format
+        if:   "!contains(steps.vars.outputs.changelog-desc, ':')"
+        run:  |
+              echo "Does not contain colon, should not run"
+              exit 1
+
+      - name: Check correct format
         if:   contains(steps.vars.outputs.changelog-desc, ':')
         run:  echo "Contains colon should run"
 
