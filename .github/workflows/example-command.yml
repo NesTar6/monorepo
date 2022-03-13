@@ -22,7 +22,7 @@ jobs:
               startsWith(steps.vars.outputs.changelog-desc, 'test:')) }}
   
       - name: Exit if not formatted
-        if: steps.vars.outputs.is-formatted == false
+        if: steps.vars.outputs.is-formatted == 'false'
         run: |
               echo "${{steps.vars.outputs.is-formatted}}"
               exit 1
