@@ -10,7 +10,11 @@ jobs:
       - name: Create variable to store command
         id: vars
         run: echo ::set-output name=changelog-desc::${{github.event.client_payload.slash_command.args.all }}
-
+      
+      - name: Checks feat
+        if: startsWith(steps.vars.outputs.changelog-desc, 'feat:')
+        run: echo "Contains feat:"
+      
       - name: Check incorrect format
         if:   |
               ${{ !(startsWith(steps.vars.outputs.changelog-desc, 'feat:') || 
