@@ -14,9 +14,13 @@ jobs:
       - name: Checks feat
         if: startsWith(steps.vars.outputs.changelog-desc, 'feat:')
         run: echo "Contains feat:"
+        
+      - name: Checks not feat
+        if: ${{ !(startsWith(steps.vars.outputs.changelog-desc, 'feat:')) }}
+        run: echo "Does not contain feat:"
       
       - name: Check incorrect format
-        if:   |
+        if: |
               ${{ !(startsWith(steps.vars.outputs.changelog-desc, 'feat:') || 
               startsWith(steps.vars.outputs.changelog-desc, 'fix:') ||
               startsWith(steps.vars.outputs.changelog-desc, 'chore:') ||
@@ -26,7 +30,7 @@ jobs:
               startsWith(steps.vars.outputs.changelog-desc, 'perf:') ||
               startsWith(steps.vars.outputs.changelog-desc, 'test:')) }} == true
 
-        run:  |
+        run: |
               echo "Does not contain follow syntax or contain defined type"
               echo "${{ !( 
               startsWith(steps.vars.outputs.changelog-desc, 'feat:') || 
@@ -40,7 +44,7 @@ jobs:
               exit 1
 
       - name: Check correct format
-        if:   |
+        if: |
               ${{ startsWith(steps.vars.outputs.changelog-desc, 'feat:') || 
               startsWith(steps.vars.outputs.changelog-desc, 'fix:') ||
               startsWith(steps.vars.outputs.changelog-desc, 'chore:') ||
