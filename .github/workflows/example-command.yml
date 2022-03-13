@@ -28,14 +28,14 @@ jobs:
 
       - name: Check correct format
         if:   |
-              "startsWith(steps.vars.outputs.changelog-desc, 'feat:') || 
+              ${{ startsWith(steps.vars.outputs.changelog-desc, 'feat:') || 
               startsWith(steps.vars.outputs.changelog-desc, 'fix:') ||
               startsWith(steps.vars.outputs.changelog-desc, 'chore:') ||
               startsWith(steps.vars.outputs.changelog-desc, 'docs:') ||
               startsWith(steps.vars.outputs.changelog-desc, 'style:') ||
               startsWith(steps.vars.outputs.changelog-desc, 'refactor:') ||
               startsWith(steps.vars.outputs.changelog-desc, 'perf:') ||
-              startsWith(steps.vars.outputs.changelog-desc, 'test:')
+              startsWith(steps.vars.outputs.changelog-desc, 'test:') }}
         run:  echo "follows format, should run"
 
       - uses: actions/checkout@v2
