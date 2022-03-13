@@ -7,6 +7,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
+      - name: Create variable to store command
+        id: vars
+        run: echo ::set-output name=changelog-desc::${{github.event.client_payload.slash_command.args.all }}
+
+      - name: Check format
+        if:   contains(steps.vars.outputs.changelog-desc, ":")
+        run:  echo "Contains colon should run
+
       - uses: actions/checkout@v2
         with:
           token: ${{ secrets.REPO_ACCESSS_TOKEN }}
@@ -21,20 +29,13 @@ jobs:
           comment-id: ${{ github.event.client_payload.github.payload.comment.id }}
           reaction-type: hooray
 
-      - name: Create variable to store command
-        id: vars
-        run: echo ::set-output name=changelog-desc::${{github.event.client_payload.slash_command.args.all }}
-
-      - name: Append to test.txt
-        run: echo "Hello @${{ github.event.client_payload.github.actor }}!" >> test.txt
 
       - name: Commit to the PR branch
         run: |
           npm i --save-dev standard-version
           git config --global user.name 'actions-bot'
           git config --global user.email '58130806+actions-bot@users.noreply.github.com'
-          git add -A
-          git commit -m "${{ steps.vars.outputs.changelog-desc }}"
+          git commit --allow-empty -m "${{ steps.vars.outputs.changelog-desc }}"
           git push
           npm run release
           git push --follow-tags origin changelog-automate
