@@ -12,14 +12,29 @@ jobs:
         run: echo ::set-output name=changelog-desc::${{github.event.client_payload.slash_command.args.all }}
 
       - name: Check incorrect format
-        if:   "!contains(steps.vars.outputs.changelog-desc, ':')"
+        if:   "!(startsWith(steps.vars.outputs.changelog-desc, 'feat:') || 
+              startsWith(steps.vars.outputs.changelog-desc, 'fix:') ||
+              startsWith(steps.vars.outputs.changelog-desc, 'chore:') ||
+              startsWith(steps.vars.outputs.changelog-desc, 'docs:') ||
+              startsWith(steps.vars.outputs.changelog-desc, 'style:') ||
+              startsWith(steps.vars.outputs.changelog-desc, 'refactor:') ||
+              startsWith(steps.vars.outputs.changelog-desc, 'perf:') ||
+              startsWith(steps.vars.outputs.changelog-desc, 'test:'))"
         run:  |
-              echo "Does not contain colon, should not run"
+              echo "Does not contain follow syntax or contain defined type"
               exit 1
 
       - name: Check correct format
-        if:   contains(steps.vars.outputs.changelog-desc, ':')
-        run:  echo "Contains colon should run"
+        if:   |
+              "startsWith(steps.vars.outputs.changelog-desc, 'feat:') || 
+              startsWith(steps.vars.outputs.changelog-desc, 'fix:') ||
+              startsWith(steps.vars.outputs.changelog-desc, 'chore:') ||
+              startsWith(steps.vars.outputs.changelog-desc, 'docs:') ||
+              startsWith(steps.vars.outputs.changelog-desc, 'style:') ||
+              startsWith(steps.vars.outputs.changelog-desc, 'refactor:') ||
+              startsWith(steps.vars.outputs.changelog-desc, 'perf:') ||
+              startsWith(steps.vars.outputs.changelog-desc, 'test:')
+        run:  echo "follows format, should run"
 
       - uses: actions/checkout@v2
         with:
