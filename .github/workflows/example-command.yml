@@ -24,7 +24,7 @@ jobs:
               startsWith(steps.vars.outputs.changelog-desc, 'style:') ||
               startsWith(steps.vars.outputs.changelog-desc, 'refactor:') ||
               startsWith(steps.vars.outputs.changelog-desc, 'perf:') ||
-              startsWith(steps.vars.outputs.changelog-desc, 'test:')) }}
+              startsWith(steps.vars.outputs.changelog-desc, 'test:')) }} === true
 
         run:  |
               echo "Does not contain follow syntax or contain defined type"
