@@ -13,7 +13,7 @@ jobs:
 
       - name: Check format
         if:   contains(steps.vars.outputs.changelog-desc, ':')
-        run:  echo "Contains colon should run
+        run:  echo "Contains colon should run"
 
       - uses: actions/checkout@v2
         with:
