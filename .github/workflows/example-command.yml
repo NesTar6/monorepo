@@ -11,7 +11,7 @@ jobs:
         id: vars
         run: |
             echo ::set-output name=changelog-desc::${{github.event.client_payload.slash_command.args.all }}
-            echo ::set-output name=is-formatted::${{ !( 
+            echo ::set-output name=is-formatted::${{ ( 
               startsWith(steps.vars.outputs.changelog-desc, 'feat:') || 
               startsWith(steps.vars.outputs.changelog-desc, 'fix:') ||
               startsWith(steps.vars.outputs.changelog-desc, 'chore:') ||
@@ -20,14 +20,6 @@ jobs:
               startsWith(steps.vars.outputs.changelog-desc, 'refactor:') ||
               startsWith(steps.vars.outputs.changelog-desc, 'perf:') ||
               startsWith(steps.vars.outputs.changelog-desc, 'test:')) }}
-              
-      - name: Checks feat
-        if: startsWith(steps.vars.outputs.changelog-desc, 'feat:')
-        run: echo "Contains feat:"
-        
-      - name: Checks not feat
-        if: ${{ !(startsWith(steps.vars.outputs.changelog-desc, 'feat:')) }}
-        run: echo "Does not contain feat:"
   
       - name: Exit if not formatted
         if: steps.vars.outputs.is-formatted == false
