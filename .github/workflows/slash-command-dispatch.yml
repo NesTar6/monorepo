@@ -11,34 +11,27 @@ jobs:
         with:
           token: ${{ secrets.REPO_ACCESSS_TOKEN }}
           commands: changelog
-          repository: NesTar6/monorepo
+          repository: NesTar6/monorepo/changelog
           
       - name: Changelog minor Dispatch
         uses: peter-evans/slash-command-dispatch@v2
         with:
           token: ${{ secrets.REPO_ACCESSS_TOKEN }}
           commands: changelog-minor
-          repository: NesTar6/monorepo
+          repository: NesTar6/monorepo/changelog-minor
           
       - name: Changelog major Dispatch
         uses: peter-evans/slash-command-dispatch@v2
         with:
           token: ${{ secrets.REPO_ACCESSS_TOKEN }}
           commands: changelog-major
-          repository: NesTar6/monorepo
-          
-      - name: Changelog minor Dispatch
-        uses: peter-evans/slash-command-dispatch@v2
-        with:
-          token: ${{ secrets.REPO_ACCESSS_TOKEN }}
-          commands: changelog-minor
-          repository: NesTar6/monorepo
+          repository: NesTar6/monorepo/changelog-major
           
       - name: Changelog patch Dispatch
         uses: peter-evans/slash-command-dispatch@v2
         with:
           token: ${{ secrets.REPO_ACCESSS_TOKEN }}
           commands: changelog-patch
-          repository: NesTar6/monorepo
+          repository: NesTar6/monorepo/changelog-patch
           
       
