@@ -44,7 +44,6 @@ jobs:
 
       - name: Commit to the PR branch
         run: |
-          npm i --save-dev standard-version
           git config --global user.name 'actions-bot'
           git config --global user.email '58130806+actions-bot@users.noreply.github.com'
           git commit --allow-empty -m "${{ steps.vars.outputs.changelog-desc }}"
