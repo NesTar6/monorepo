@@ -14,7 +14,7 @@ jobs:
             echo ::set-output name=is-formatted::${{ ( 
               startsWith(github.event.client_payload.slash_command.args.all, 'minor') || 
               startsWith(github.event.client_payload.slash_command.args.all, 'major') ||
-              startsWith(github.event.client_payload.slash_command.args.all, 'patch') ||
+              startsWith(github.event.client_payload.slash_command.args.all, 'patch') ) }}
   
       - name: Exit if not formatted
         if: steps.vars.outputs.is-formatted == 'false'
