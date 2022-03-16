@@ -1,1 +1,79 @@
+name: changelog-publish
+on:
+  repository_dispatch:
+    types: [changelog-publish-command]
+jobs:
+  changelog:
+    runs-on: ubuntu-latest
+    steps:
 
+      - name: Create variable to store command
+        id: vars
+        run: |
+            echo ::set-output name=publish-desc::${{github.event.client_payload.slash_command.args.all }}
+            echo ::set-output name=is-formatted::${{ ( 
+              startsWith(github.event.client_payload.slash_command.args.all, 'minor') || 
+              startsWith(github.event.client_payload.slash_command.args.all, 'major') ||
+              startsWith(github.event.client_payload.slash_command.args.all, 'patch') ||
+  
+      - name: Exit if not formatted
+        if: steps.vars.outputs.is-formatted == 'false'
+        run: |
+              echo "${{steps.vars.outputs.is-formatted}}"
+              exit 1
+              
+      
+      - uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.REPO_ACCESSS_TOKEN }}
+          repository: ${{ github.event.client_payload.pull_request.head.repo.full_name }}
+          ref: ${{ github.event.client_payload.pull_request.head.ref }}
+
+      - name: Add reaction
+        uses: peter-evans/create-or-update-comment@v1
+        with:
+          token: ${{ secrets.REPO_ACCESSS_TOKEN }}
+          repository: ${{ github.event.client_payload.github.payload.repository.full_name }}
+          comment-id: ${{ github.event.client_payload.github.payload.comment.id }}
+          reaction-type: hooray
+          
+      - name: Publish Patch
+        if: steps.vars.outputs.publish-desc == 'patch'
+        run: |
+          npm i --save-dev standard-version
+          git config --global user.name 'actions-bot'
+          git config --global user.email '58130806+actions-bot@users.noreply.github.com'
+          git push
+          npm run release:patch
+          git push --follow-tags origin changelog-automate
+          
+      - name: Publish Minor
+        if: steps.vars.outputs.publish-desc == 'minor'
+        run: |
+          npm i --save-dev standard-version
+          git config --global user.name 'actions-bot'
+          git config --global user.email '58130806+actions-bot@users.noreply.github.com'
+          git push
+          npm run release:minor
+          git push --follow-tags origin changelog-automate
+          
+      - name: Publish Major
+        if: steps.vars.outputs.publish-desc == 'major'
+        run: |
+          npm i --save-dev standard-version
+          git config --global user.name 'actions-bot'
+          git config --global user.email '58130806+actions-bot@users.noreply.github.com'
+          git push
+          npm run release:major
+          git push --follow-tags origin changelog-automate
+          
+      - name: Create comment
+        uses: peter-evans/create-or-update-comment@v1
+        with:
+          token: ${{ secrets.REPO_ACCESSS_TOKEN }}
+          repository: ${{ github.event.client_payload.github.payload.repository.full_name }}
+          issue-number: ${{ github.event.client_payload.github.payload.issue.number }}
+          body: |
+            Hello @${{ github.event.client_payload.github.actor }}!
+            published the following version update in the changelog:
+            `${{ steps.vars.outputs.changelog-desc }}`
