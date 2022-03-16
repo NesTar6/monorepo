@@ -6,9 +6,39 @@ jobs:
   slashCommandDispatch:
     runs-on: ubuntu-latest
     steps:
-      - name: Slash Command Dispatch
+      - name: Changelog Commit Command Dispatch
         uses: peter-evans/slash-command-dispatch@v2
         with:
           token: ${{ secrets.REPO_ACCESSS_TOKEN }}
           commands: changelog
           repository: NesTar6/monorepo
+          
+      - name: Changelog minor Dispatch
+        uses: peter-evans/slash-command-dispatch@v2
+        with:
+          token: ${{ secrets.REPO_ACCESSS_TOKEN }}
+          commands: changelog-minor
+          repository: NesTar6/monorepo
+          
+      - name: Changelog major Dispatch
+        uses: peter-evans/slash-command-dispatch@v2
+        with:
+          token: ${{ secrets.REPO_ACCESSS_TOKEN }}
+          commands: changelog-major
+          repository: NesTar6/monorepo
+          
+      - name: Changelog minor Dispatch
+        uses: peter-evans/slash-command-dispatch@v2
+        with:
+          token: ${{ secrets.REPO_ACCESSS_TOKEN }}
+          commands: changelog-minor
+          repository: NesTar6/monorepo
+          
+      - name: Changelog patch Dispatch
+        uses: peter-evans/slash-command-dispatch@v2
+        with:
+          token: ${{ secrets.REPO_ACCESSS_TOKEN }}
+          commands: changelog-patch
+          repository: NesTar6/monorepo
+          
+      
