@@ -12,14 +12,14 @@ jobs:
         run: |
             echo ::set-output name=changelog-desc::${{github.event.client_payload.slash_command.args.all }}
             echo ::set-output name=is-formatted::${{ ( 
-              startsWith(github.event.client_payload.slash_command.args.all, 'feat:') || 
-              startsWith(github.event.client_payload.slash_command.args.all, 'fix:') ||
-              startsWith(github.event.client_payload.slash_command.args.all, 'chore:') ||
-              startsWith(github.event.client_payload.slash_command.args.all, 'docs:') ||
-              startsWith(github.event.client_payload.slash_command.args.all, 'style:') ||
-              startsWith(github.event.client_payload.slash_command.args.all, 'refactor:') ||
-              startsWith(github.event.client_payload.slash_command.args.all, 'perf:') ||
-              startsWith(github.event.client_payload.slash_command.args.all, 'test:')) }}
+              startsWith(github.event.client_payload.slash_command.args.all, 'changelog-feat:') || 
+              startsWith(github.event.client_payload.slash_command.args.all, 'changelog-fix:') ||
+              startsWith(github.event.client_payload.slash_command.args.all, 'changelog-chore:') ||
+              startsWith(github.event.client_payload.slash_command.args.all, 'changelog-docs:') ||
+              startsWith(github.event.client_payload.slash_command.args.all, 'changelog-style:') ||
+              startsWith(github.event.client_payload.slash_command.args.all, 'changelog-refactor:') ||
+              startsWith(github.event.client_payload.slash_command.args.all, 'changelog-perf:') ||
+              startsWith(github.event.client_payload.slash_command.args.all, 'changelog-test:')) }}
   
       - name: Exit if not formatted
         if: steps.vars.outputs.is-formatted == 'false'
