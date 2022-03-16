@@ -76,4 +76,4 @@ jobs:
           body: |
             Hello @${{ github.event.client_payload.github.actor }}!
             published the following version update in the changelog:
-            `${{ steps.vars.outputs.changelog-desc }}`
+            `${{ steps.vars.outputs.publish-desc }}`
