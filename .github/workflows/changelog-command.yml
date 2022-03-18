@@ -12,7 +12,7 @@ jobs:
         run: |
             echo ::set-output name=changelog-desc::${{github.event.client_payload.slash_command.args.all }}
             echo ::set-output name=is-formatted::${{ ( 
-              startsWith(github.event.client_payload.slash_command.args.all, 'feat:') ||
+              startsWith(github.event.client_payload.slash_command.args.all, 'CHfeat:') ||
               startsWith(github.event.client_payload.slash_command.args.all, 'changelog-feat:') || 
               startsWith(github.event.client_payload.slash_command.args.all, 'changelog-fix:') ||
               startsWith(github.event.client_payload.slash_command.args.all, 'changelog-chore:') ||
