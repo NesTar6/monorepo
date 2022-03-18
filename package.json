@@ -25,8 +25,8 @@
   "scripts": {
     "release": "standard-version",
     "release:minor": "standard-version --parser-opts ./versionrc.js --release-as minor",
-    "release:patch": "standard-version --parser-opts ./versionrc.j --release-as patch",
-    "release:major": "standard-version --parser-opts ./versionrc.j --release-as major",
+    "release:patch": "standard-version --parser-opts ./versionrc.js --release-as patch",
+    "release:major": "standard-version --parser-opts ./versionrc.js --release-as major",
     "reset": "yarn clean && yarn && yarn build",
     "clean": "npx rimraf ./**/node_modules ./**/build ./**/coverage ./**/.w3",
     "install:dependencies": "cd dependencies && yarn",
