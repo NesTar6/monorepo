@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 0.1.7 (2022-03-18)
+
+
+### Features
+
+* testing versionrc file ([5e8c14d](https://github.com/web3-api/monorepo/commit/5e8c14d98c6ade7f2c8f5fb466af80faa971138f))
+
 ### 0.1.8 (2022-03-18)
 
 ### 0.1.7 (2022-03-18)
