@@ -1,6 +1,6 @@
 {
   "types": [
-    {"type":"changelog-feat","section":"Features"},
+    {"type":"CHfeat","section":"Features"},
     {"type":"changelog-fix","section":"Bug Fixes"},
     {"type":"test","section":"Tests", "hidden": true},
     {"type":"build","section":"Build System", "hidden": true},
