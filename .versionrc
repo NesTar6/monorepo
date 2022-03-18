@@ -1,14 +1,9 @@
 {
-    "types": [
-      {"type": "changelog-feat", "section": "Features"},
-      {"type": "changelog-fix", "section": "Bug Fixes"},
-      {"type": "changelog-chore", "hidden": true},
-      {"type": "changelog-docs", "hidden": true},
-      {"type": "changelog-style", "hidden": true},
-      {"type": "changelog-refactor", "hidden": true},
-      {"type": "changelog-perf", "hidden": true},
-      {"type": "changelog-test", "hidden": true}
-    ],
-    "commitUrlFormat": "https://github.com/NesTar6/monorepo/commits/{{hash}}",
-    "compareUrlFormat": "https://github.com/NesTar6/monorepo/compare/{{previousTag}}...{{currentTag}}"
-  }
+  "types": [
+    {"type":"feat","section":"Features"},
+    {"type":"fix","section":"Bug Fixes"},
+    {"type":"test","section":"Tests", "hidden": true},
+    {"type":"build","section":"Build System", "hidden": true},
+    {"type":"ci","hidden":true}
+  ]
+}
