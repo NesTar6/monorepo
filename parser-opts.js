@@ -10,7 +10,7 @@ module.exports = function (config) {
       'scope',
       'subject'
     ],
-    noteKeywords: ['BREAKING CHANGE', 'BREAKING-CHANGE'],
+    noteKeywords: ['changelog feat', 'changelog-feat'],
     revertPattern: /^(?:Revert|revert:)\s"?([\s\S]+?)"?\s*This reverts commit (\w*)\./i,
     revertCorrespondence: ['header', 'hash'],
     issuePrefixes: config.issuePrefixes
